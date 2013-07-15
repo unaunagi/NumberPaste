@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import sublime, sublime_plugin
 import re
 
