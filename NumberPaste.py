@@ -15,7 +15,7 @@ class NumberPasteCommand(sublime_plugin.TextCommand):
             end = int(m.group(2))
             paste = "";
             for i in range(start,end+1):
-                paste += clip.replace('$$$', str(i))
+                paste += clip.replace('$$$', str(i)) + "\n"
             #最後にまとめてペースト
             self.view.replace(edit, self.view.sel()[0], paste)
         else:
