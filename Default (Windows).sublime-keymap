@@ -1,0 +1,3 @@
+[
+	{ "keys": ["ctrl+alt+shift+v"], "command": "number_paste" }
+]
