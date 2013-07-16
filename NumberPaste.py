@@ -13,11 +13,25 @@ class NumberPasteCommand(sublime_plugin.TextCommand):
         m = re.match('(\d+)-(\d+)',select_txt)
         if m:
             #書式が正しいので、番号を書き換えながら連続ペーストする
+            #開始番号
             start = int(m.group(1))
+            #終了番号
             end = int(m.group(2))
+            #開始番号1文字目が0の場合、足りない桁をゼロで埋めてから書き出す
+            #桁数は開始番号のものを参照
+            if m.group(1)[0] == '0':
+                zero_padding = len(m.group(1))
+            else:
+                zero_padding = 0
+
             paste = "";
             for i in range(start,end+1):
-                paste += clip.replace('$$$', str(i)) + "\n"
+                #桁数ゼロ
+                if len(str(i)) > zero_padding:
+                    num = str(i)
+                else:
+                    num = str(i).zfill(zero_padding)
+                paste += clip.replace('$$$', num) + "\n"
             #最後にまとめてペースト
             self.view.replace(edit, self.view.sel()[0], paste)
         else:
